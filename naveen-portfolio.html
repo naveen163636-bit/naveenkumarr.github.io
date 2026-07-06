@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naveen Kumar R — Data Analyst Aspirant</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  :root{
+    --ink:#12172B;
+    --ink2:#1B2140;
+    --paper:#F7F5EF;
+    --coral:#FF6B5B;
+    --teal:#2DD4BF;
+    --amber:#FFB238;
+    --violet:#8B7FFF;
+    --text-dark:#12172B;
+    --text-light:#EDEBFF;
+    --muted:#8A8FAE;
+    --radius:18px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--text-dark);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-0.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:6px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(18,23,43,0.9);backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto;}
+  .logo{color:var(--text-light);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;display:flex;align-items:center;gap:8px;}
+  .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--coral);}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{color:var(--text-light);font-size:0.92rem;font-weight:500;opacity:0.8;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;color:var(--teal);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text-light);font-size:1.6rem;cursor:pointer;}
+
+  @media (max-width:720px){
+    .nav-links{position:fixed;top:60px;right:0;left:0;background:var(--ink2);flex-direction:column;padding:20px 24px;gap:18px;transform:translateY(-120%);transition:transform .25s ease;}
+    .nav-links.open{transform:translateY(0);}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(139,127,255,0.25), transparent 45%),
+      radial-gradient(circle at 85% 0%, rgba(255,107,91,0.2), transparent 40%),
+      var(--ink);
+    color:var(--text-light);
+    padding:160px 0 90px;
+    position:relative;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:0.78rem;
+    color:var(--teal);border:1px solid rgba(45,212,191,0.35);
+    padding:6px 14px;border-radius:999px;margin-bottom:24px;
+  }
+  .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;margin-bottom:18px;}
+  .hero h1 span{color:var(--coral);}
+  .hero p.tagline{font-size:1.15rem;color:var(--muted);max-width:520px;margin-bottom:36px;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:64px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 26px;border-radius:12px;font-weight:600;font-size:0.95rem;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--coral);color:var(--ink);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,107,91,0.35);}
+  .btn-ghost{border:1px solid rgba(255,255,255,0.25);color:var(--text-light);}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+  /* KPI tiles */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  @media (max-width:800px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+  .kpi{
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+    border-radius:var(--radius);padding:20px 18px;
+  }
+  .kpi .num{font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:700;}
+  .kpi .label{font-size:0.8rem;color:var(--muted);margin-top:4px;}
+  .kpi.c1 .num{color:var(--coral);}
+  .kpi.c2 .num{color:var(--teal);}
+  .kpi.c3 .num{color:var(--amber);}
+  .kpi.c4 .num{color:var(--violet);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec-head{margin-bottom:48px;}
+  .sec-tag{font-family:'JetBrains Mono',monospace;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--coral);margin-bottom:10px;display:block;}
+  .sec-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start;}
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:#3c3f57;font-size:1.05rem;margin-bottom:16px;}
+  .chip-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .chip{
+    font-size:0.82rem;font-weight:600;padding:7px 14px;border-radius:999px;
+    background:#fff;border:1px solid #e4e1d6;
+  }
+  .side-card{background:var(--ink);color:var(--text-light);border-radius:var(--radius);padding:26px;}
+  .side-card h3{font-size:1rem;color:var(--teal);margin-bottom:14px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;font-size:0.78rem;letter-spacing:0.06em;}
+  .side-card ul{list-style:none;margin-bottom:20px;}
+  .side-card li{font-size:0.92rem;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.12);color:var(--muted);}
+  .side-card li:last-child{border-bottom:none;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  @media (max-width:760px){.skills-cols{grid-template-columns:1fr;}}
+  .skill-card{background:#fff;border-radius:var(--radius);padding:26px;border:1px solid #eae6d8;}
+  .skill-card .dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:10px;}
+  .skill-card h3{font-size:1.05rem;margin-bottom:16px;}
+  .skill-list{list-style:none;}
+  .skill-list li{display:flex;align-items:center;padding:8px 0;font-size:0.95rem;color:#3c3f57;}
+  .skill-list li::before{content:"";width:8px;height:8px;border-radius:50%;margin-right:12px;flex-shrink:0;}
+  .skill-card.bi .skill-list li::before{background:var(--teal);}
+  .skill-card.fin .skill-list li::before{background:var(--amber);}
+  .skill-card.office .skill-list li::before{background:var(--violet);}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  @media (max-width:760px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    border-radius:24px;padding:30px;color:#fff;position:relative;overflow:hidden;
+    min-height:320px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .proj-card.p1{background:linear-gradient(145deg,#7B2D3E,#B4224A 60%,#FF6B5B);}
+  .proj-card.p2{background:linear-gradient(145deg,#12405C,#1E6E8C 60%,#2DD4BF);}
+  .proj-tag{font-family:'JetBrains Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.8;margin-bottom:10px;display:block;}
+  .proj-card h3{font-size:1.5rem;margin-bottom:10px;}
+  .proj-card p{font-size:0.95rem;opacity:0.92;margin-bottom:20px;}
+  .proj-tools{display:flex;gap:8px;flex-wrap:wrap;}
+  .proj-tools span{font-size:0.75rem;background:rgba(255,255,255,0.18);padding:5px 11px;border-radius:999px;font-weight:600;}
+  .mini-chart{display:flex;align-items:flex-end;gap:6px;height:54px;margin-top:auto;margin-bottom:16px;}
+  .mini-chart i{display:block;width:10px;border-radius:4px 4px 0 0;background:rgba(255,255,255,0.55);}
+
+  /* ---------- EDUCATION TIMELINE (real sequence) ---------- */
+  .timeline{position:relative;padding-left:32px;border-left:2px solid #e4e1d6;}
+  .tl-item{position:relative;margin-bottom:36px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{
+    content:"";position:absolute;left:-41px;top:4px;width:16px;height:16px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--coral);
+  }
+  .tl-item .yr{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--coral);font-weight:700;}
+  .tl-item h3{font-size:1.1rem;margin:4px 0 2px;}
+  .tl-item .org{color:#6b6f8c;font-size:0.9rem;}
+
+  /* ---------- CERT + INTERNSHIP ---------- */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  @media (max-width:760px){.two-col{grid-template-columns:1fr;}}
+  .cert-list{list-style:none;}
+  .cert-list li{
+    background:#fff;border:1px solid #eae6d8;border-radius:14px;padding:14px 18px;margin-bottom:12px;
+    font-size:0.92rem;display:flex;gap:12px;align-items:flex-start;
+  }
+  .cert-list li .tick{color:var(--teal);font-weight:700;}
+  .intern-box{background:var(--ink);color:var(--text-light);border-radius:var(--radius);padding:28px;}
+  .intern-box .yr{color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:0.8rem;}
+  .intern-box h3{margin:6px 0;font-size:1.2rem;}
+  .intern-box p{color:var(--muted);font-size:0.92rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--ink);color:var(--text-light);border-radius:28px;
+    padding:56px 40px;text-align:center;margin-top:20px;
+  }
+  .contact h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px;}
+  .contact p{color:var(--muted);max-width:480px;margin:0 auto 32px;}
+  .contact-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+  footer{text-align:center;padding:32px 0;color:#9a9db8;font-size:0.85rem;background:var(--ink);}
+  footer a{color:var(--teal);}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo"><span class="logo-dot"></span>Naveen Kumar R</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">● Open to internships &amp; entry-level roles</span>
+    <h1>Naveen Kumar R —<br>turning raw data into <span>clear decisions.</span></h1>
+    <p class="tagline">Data Analyst aspirant with hands-on practice in Excel, Power BI, Tableau and SQL, building dashboards that make numbers easy to act on.</p>
+    <div class="hero-cta">
+      <a href="mailto:naveen.163636@gmail.com" class="btn btn-primary">Get in touch</a>
+      <a href="#projects" class="btn btn-ghost">See my dashboards</a>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi c1"><div class="num">6+</div><div class="label">Analytics tools</div></div>
+      <div class="kpi c2"><div class="num">5</div><div class="label">Certifications</div></div>
+      <div class="kpi c3"><div class="num">2</div><div class="label">Dashboard projects</div></div>
+      <div class="kpi c4"><div class="num">1</div><div class="label">Live internship</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">01 — About</span>
+      <h2>Commerce fundamentals, analytics ambition.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm a B.Com (IT) student at KG College of Arts &amp; Science, Bharathiar University, currently looking for an internship or entry-level role to sharpen my skills in data analytics.</p>
+        <p>My commerce background gives me a solid grip on how businesses actually use numbers — and I pair that with hands-on practice in BI tools to turn spreadsheets into dashboards people can act on. I'm looking to upskill fast and contribute early.</p>
+        <div class="chip-row">
+          <span class="chip">Adaptive</span>
+          <span class="chip">Critical Thinking</span>
+          <span class="chip">Creativity</span>
+          <span class="chip">English</span>
+          <span class="chip">Tamil</span>
+        </div>
+      </div>
+      <div class="side-card reveal">
+        <h3>Areas of interest</h3>
+        <ul>
+          <li>Data Analytics &amp; Business Intelligence</li>
+          <li>Financial Markets &amp; Accounting</li>
+          <li>Digital Marketing &amp; E-Commerce</li>
+        </ul>
+        <h3>Based in</h3>
+        <ul><li>Sathyamangalam, Tamil Nadu</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:#F1EEE3;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">02 — Skills</span>
+      <h2>What I work with.</h2>
+    </div>
+    <div class="skills-cols">
+      <div class="skill-card bi reveal">
+        <h3><span class="dot" style="background:var(--teal);"></span>Data &amp; BI</h3>
+        <ul class="skill-list">
+          <li>Tableau</li>
+          <li>Power BI</li>
+          <li>Python for Data Science (basics)</li>
+          <li>Data Analytics</li>
+        </ul>
+      </div>
+      <div class="skill-card fin reveal">
+        <h3><span class="dot" style="background:var(--amber);"></span>Finance</h3>
+        <ul class="skill-list">
+          <li>Tally with GST</li>
+          <li>Accounting &amp; Management</li>
+        </ul>
+      </div>
+      <div class="skill-card office reveal">
+        <h3><span class="dot" style="background:var(--violet);"></span>Office Tools</h3>
+        <ul class="skill-list">
+          <li>MS Excel</li>
+          <li>Visual Basic</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">03 — Projects</span>
+      <h2>Dashboards I've built.</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card p1 reveal">
+        <div>
+          <span class="proj-tag">Power BI / Tableau</span>
+          <h3>Netflix Content Dashboard</h3>
+          <p>An interactive dashboard exploring Netflix's content library — breaking down titles by genre, type, release trends and ratings to surface viewing patterns at a glance.</p>
+        </div>
+        <div class="mini-chart" aria-hidden="true">
+          <i style="height:40%;"></i><i style="height:65%;"></i><i style="height:30%;"></i><i style="height:80%;"></i><i style="height:50%;"></i><i style="height:70%;"></i>
+        </div>
+        <div class="proj-tools"><span>Power BI</span><span>Tableau</span><span>Excel</span></div>
+      </div>
+      <div class="proj-card p2 reveal">
+        <div>
+          <span class="proj-tag">Excel / Power BI</span>
+          <h3>Academic Performance Dashboard</h3>
+          <p>A dashboard tracking academic performance metrics across subjects and terms, designed to highlight trends and flag areas that need attention.</p>
+        </div>
+        <div class="mini-chart" aria-hidden="true">
+          <i style="height:55%;"></i><i style="height:35%;"></i><i style="height:75%;"></i><i style="height:45%;"></i><i style="height:60%;"></i><i style="height:85%;"></i>
+        </div>
+        <div class="proj-tools"><span>Excel</span><span>Power BI</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" style="background:#F1EEE3;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">04 — Education</span>
+      <h2>Academic timeline.</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <span class="yr">2023 – 2026</span>
+        <h3>B.Com with IT</h3>
+        <div class="org">KG College of Arts &amp; Science, Bharathiar University</div>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2022 – 2023 · 87.5%</span>
+        <h3>Higher Secondary Certificate</h3>
+        <div class="org">Shree Gurukulam Higher Sec School, Gobichettipalayam</div>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2020 – 2021 · 67.2%</span>
+        <h3>Secondary School Certificate</h3>
+        <div class="org">Shree Gurukulam Public School, Gobichettipalayam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">05 — Experience &amp; Certificates</span>
+      <h2>Internship &amp; learning.</h2>
+    </div>
+    <div class="two-col">
+      <div class="reveal">
+        <div class="intern-box">
+          <span class="yr">2024</span>
+          <h3>Digital Internship — Data Analytics</h3>
+          <p>Board Infinity</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <ul class="cert-list">
+          <li><span class="tick">✓</span>Fundamentals of Accounting and Reporting — Coursera</li>
+          <li><span class="tick">✓</span>Python for Data Science, AI &amp; Development — Coursera</li>
+          <li><span class="tick">✓</span>Marketing Analytics and Measurement — Coursera</li>
+          <li><span class="tick">✓</span>Google Digital Marketing &amp; E-Commerce — Coursera</li>
+          <li><span class="tick">✓</span>National Institute of Securities Markets — SBICAP Securities Limited</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <h2>Let's work together.</h2>
+      <p>Looking for a data analyst internship or entry-level role — happy to talk about how I can contribute.</p>
+      <div class="contact-links">
+        <a href="mailto:naveen.163636@gmail.com" class="btn btn-primary">naveen.163636@gmail.com</a>
+        <a href="tel:+916382721053" class="btn btn-ghost">+91 63827 21053</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Naveen Kumar R · Sathyamangalam, Tamil Nadu · Built with <a href="#top">care</a>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.15});
+  reveals.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
